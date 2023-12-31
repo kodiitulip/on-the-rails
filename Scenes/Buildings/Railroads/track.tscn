@@ -1,0 +1,131 @@
+[gd_scene load_steps=13 format=3 uid="uid://25avnffhg2tx"]
+
+[ext_resource type="Texture2D" uid="uid://cuavlmqqttskv" path="res://Assets/track.png" id="1_mfg06"]
+[ext_resource type="Script" path="res://Scenes/Buildings/Scripts/Railroads/track.gd" id="1_non8r"]
+[ext_resource type="Texture2D" uid="uid://c07o07i265j81" path="res://Assets/crosstie.png" id="2_yrrmq"]
+[ext_resource type="Script" path="res://Scenes/Buildings/Scripts/Railroads/junction_area.gd" id="4_qhdtm"]
+[ext_resource type="Texture2D" uid="uid://ef2rlhe1n82m" path="res://Assets/arrow.png" id="5_5jgn0"]
+
+[sub_resource type="Curve2D" id="Curve2D_dyx7f"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 50.3806, -42.3272, 32, 0)
+}
+point_count = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fhs5c"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-1.5, -13.5, 0, 3.00001, 27, 0),
+"attribute_data": PackedByteArray(0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0),
+"format": 34393296913,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 1, 0, 2, 0, 3, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 192, 63, 0, 0, 88, 65, 0, 0, 192, 191, 0, 0, 88, 65, 0, 0, 192, 191, 0, 0, 88, 193, 0, 0, 192, 63, 0, 0, 88, 193)
+}]
+
+[sub_resource type="MultiMesh" id="MultiMesh_aktxo"]
+resource_local_to_scene = true
+instance_count = 4
+mesh = SubResource("ArrayMesh_fhs5c")
+buffer = PackedFloat32Array(1, 0, 0, 4, 0, 1, 0, 0, 1, 0, 0, 12, 0, 1, 0, 0, 1, 0, 0, 20, 0, 1, 0, 0, 1, 0, 0, 28, 0, 1, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3cij"]
+size = Vector2(7, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vlxh"]
+size = Vector2(7, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ywag"]
+size = Vector2(7, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bykxq"]
+size = Vector2(7, 16)
+
+[node name="Track" type="Path2D"]
+z_index = 3
+z_as_relative = false
+curve = SubResource("Curve2D_dyx7f")
+script = ExtResource("1_non8r")
+
+[node name="Crosstie" type="MeshInstance2D" parent="."]
+visible = false
+mesh = SubResource("ArrayMesh_fhs5c")
+texture = ExtResource("2_yrrmq")
+
+[node name="Crossties" type="MultiMeshInstance2D" parent="."]
+multimesh = SubResource("MultiMesh_aktxo")
+texture = ExtResource("2_yrrmq")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 5, 0, 7.42188, 0, 10.125, 0, 13.0156, 0, 16, 0, 18.9844, 0, 21.875, 0, 24.5781, 0, 27, 0, 32, 0)
+width = 20.0
+texture = ExtResource("1_mfg06")
+texture_mode = 1
+
+[node name="Head" type="PathFollow2D" parent="."]
+
+[node name="HeadOut" type="Area2D" parent="Head"]
+unique_name_in_owner = true
+collision_layer = 0
+script = ExtResource("4_qhdtm")
+
+[node name="Arrow" type="Sprite2D" parent="Head/HeadOut"]
+visible = false
+texture = ExtResource("5_5jgn0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head/HeadOut"]
+position = Vector2(-4.5, 0)
+shape = SubResource("RectangleShape2D_g3cij")
+
+[node name="HeadIn" type="Area2D" parent="Head"]
+unique_name_in_owner = true
+collision_layer = 0
+script = ExtResource("4_qhdtm")
+track_part = 1
+
+[node name="Arrow" type="Sprite2D" parent="Head/HeadIn"]
+visible = false
+texture = ExtResource("5_5jgn0")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head/HeadIn"]
+position = Vector2(4.5, 0)
+shape = SubResource("RectangleShape2D_5vlxh")
+
+[node name="Tail" type="PathFollow2D" parent="."]
+position = Vector2(32, 0)
+progress = 32.0
+
+[node name="TailOut" type="Area2D" parent="Tail"]
+unique_name_in_owner = true
+collision_layer = 0
+script = ExtResource("4_qhdtm")
+track_side = 1
+
+[node name="Arrow" type="Sprite2D" parent="Tail/TailOut"]
+visible = false
+texture = ExtResource("5_5jgn0")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tail/TailOut"]
+position = Vector2(4.5, 0)
+shape = SubResource("RectangleShape2D_5ywag")
+
+[node name="TailIn" type="Area2D" parent="Tail"]
+unique_name_in_owner = true
+collision_layer = 0
+script = ExtResource("4_qhdtm")
+track_side = 1
+track_part = 1
+
+[node name="Arrow" type="Sprite2D" parent="Tail/TailIn"]
+visible = false
+texture = ExtResource("5_5jgn0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tail/TailIn"]
+position = Vector2(-4.5, 0)
+shape = SubResource("RectangleShape2D_bykxq")
