@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8ockt1tysyry"]
+
+[ext_resource type="PackedScene" uid="uid://bmkylp6mag1b5" path="res://UI/Builder/builder_ui.tscn" id="1_q40g5"]
+
+[node name="UIManager" type="CanvasLayer" groups=["ui_manager"]]
+
+[node name="BuilderUI" parent="." instance=ExtResource("1_q40g5")]

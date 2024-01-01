@@ -1,46 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://c83u5iov3q14b"]
+[gd_scene load_steps=4 format=3 uid="uid://c4awtv2ohxirs"]
 
-[ext_resource type="Script" path="res://Scripts/Camera/pan_camera.gd" id="1_xns7h"]
+[ext_resource type="Script" path="res://Scripts/panning_camera.gd" id="1_haewf"]
+[ext_resource type="PackedScene" uid="uid://b8ockt1tysyry" path="res://UI/ui_manager.tscn" id="1_ut2lw"]
 [ext_resource type="Texture2D" uid="uid://by71etoiufin5" path="res://Assets/train_engine.png" id="2_2c6x6"]
-[ext_resource type="PackedScene" uid="uid://c1g03md5ouqwo" path="res://Scenes/UI/ui.tscn" id="3_mv8u7"]
-
-[sub_resource type="GDScript" id="GDScript_0rlek"]
-resource_name = "Main"
-script/source = "extends Node2D
-
-
-func _physics_process(delta: float) -> void:
-	%MouseCursorArea.position = get_global_mouse_position()
-	if GameManager._current_state != GameManager.State.TRACK_BUILD:
-		%MouseCursorArea.monitorable = false
-	else:
-		%MouseCursorArea.monitorable = true
-"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_jdy5h"]
-radius = 0.5
 
 [node name="Main" type="Node2D"]
-script = SubResource("GDScript_0rlek")
-
-[node name="MouseCursorArea" type="Area2D" parent="."]
-unique_name_in_owner = true
-collision_mask = 0
-
-[node name="CrsorCollision" type="CollisionShape2D" parent="MouseCursorArea"]
-shape = SubResource("CircleShape2D_jdy5h")
 
 [node name="PanningCamera" type="Camera2D" parent="."]
-script = ExtResource("1_xns7h")
+script = ExtResource("1_haewf")
 
-[node name="TrainEngine" type="Sprite2D" parent="."]
-texture = ExtResource("2_2c6x6")
-
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UIManager" parent="." instance=ExtResource("1_ut2lw")]
 layer = 2
 
-[node name="UI" parent="UI" instance=ExtResource("3_mv8u7")]
+[node name="WorldContainer" type="Node2D" parent="." groups=["world_container"]]
 
-[node name="Buildings" type="Node2D" parent="." groups=["building_container"]]
+[node name="BuildingContainer" type="Node2D" parent="WorldContainer" groups=["building_container"]]
 
-[node name="Tracks" type="Node2D" parent="." groups=["track_building_container"]]
+[node name="TrainEngine" type="Sprite2D" parent="WorldContainer"]
+position = Vector2(40, 16)
+texture = ExtResource("2_2c6x6")
