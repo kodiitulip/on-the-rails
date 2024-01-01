@@ -11,6 +11,10 @@ script/source = "extends Node2D
 
 func _physics_process(delta: float) -> void:
 	%MouseCursorArea.position = get_global_mouse_position()
+	if GameManager._current_state != GameManager.State.TRACK_BUILD:
+		%MouseCursorArea.monitorable = false
+	else:
+		%MouseCursorArea.monitorable = true
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdy5h"]
@@ -23,7 +27,7 @@ script = SubResource("GDScript_0rlek")
 unique_name_in_owner = true
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseCursorArea"]
+[node name="CrsorCollision" type="CollisionShape2D" parent="MouseCursorArea"]
 shape = SubResource("CircleShape2D_jdy5h")
 
 [node name="PanningCamera" type="Camera2D" parent="."]

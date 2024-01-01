@@ -20,7 +20,10 @@ func disconnect_signals() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	sprite.visible = true
+	TrackBuildManager._connecting_track = track
+	TrackBuildManager._connecting_side = track_side
 
 
 func _on_area_exited(area: Area2D) -> void:
 	sprite.visible = false
+	TrackBuildManager._connecting_track = null

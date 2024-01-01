@@ -8,6 +8,8 @@ var _current_spawnable: Track
 var _preview_container: Node2D
 var _container: Node2D
 var _clicks: int  = 0
+var _connecting_track: Track
+var _connecting_side: int
 
 func _ready() -> void:
 	_preview_container = Node2D.new()
@@ -21,13 +23,32 @@ func _process(_delta: float) -> void:
 		var camera: Camera2D = get_viewport().get_camera_2d()
 		var mouse_pos: Vector2 = camera.get_global_mouse_position()
 		var cursor_pos: Vector2 = mouse_pos.snapped(grid_size)
-		if _clicks == 0:
-			_current_spawnable.position = cursor_pos
-		elif _clicks == 1:
-			_current_spawnable.curve.set_point_position(
-				1,
-				(mouse_pos - _current_spawnable.position).snapped(grid_size)
-			)
+		if _connecting_track:
+			_handle_connecting_track()
+		else:
+			_handle_building_pos(cursor_pos)
+
+
+func _handle_building_pos(pos: Vector2) -> void:
+	if _clicks == 0:
+		_current_spawnable.position = pos
+	elif _clicks == 1:
+		_current_spawnable.curve.set_point_position(
+			1,
+			pos - _current_spawnable.position
+		)
+
+
+func _handle_connecting_track() -> void:
+	var connecting_point = _connecting_track.curve.get_point_position(_connecting_side)
+	var cnn_pos = connecting_point + _connecting_track.position
+	if _clicks == 0:
+		_current_spawnable.position = cnn_pos
+	else:
+		_current_spawnable.curve.set_point_position(
+			1,
+			cnn_pos - _current_spawnable.position
+		)
 
 
 func _unhandled_input(event: InputEvent) -> void:
