@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxknq77fh541"]
+
+[ext_resource type="Script" path="res://Scenes/Buildings/building.gd" id="1_mn2nh"]
+[ext_resource type="Texture2D" uid="uid://cx3qqaqk6c6bi" path="res://icon.svg" id="2_sl2yu"]
+
+[node name="Building" type="Node2D"]
+script = ExtResource("1_mn2nh")
+
+[node name="Collision" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_sl2yu")

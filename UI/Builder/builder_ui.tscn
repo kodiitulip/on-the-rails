@@ -1,23 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmkylp6mag1b5"]
+[gd_scene load_steps=10 format=3 uid="uid://bmkylp6mag1b5"]
 
 [ext_resource type="Script" path="res://UI/Builder/builder_ui.gd" id="1_8p1r4"]
 [ext_resource type="Texture2D" uid="uid://cuavlmqqttskv" path="res://Assets/track.png" id="2_kkf6p"]
 [ext_resource type="Texture2D" uid="uid://cx3qqaqk6c6bi" path="res://icon.svg" id="3_lhk0c"]
-[ext_resource type="PackedScene" uid="uid://bxknq77fh541" path="res://Scenes/Buildings/base_building.tscn" id="3_luiuj"]
+[ext_resource type="PackedScene" uid="uid://xcwdolfsija6" path="res://Scenes/Buildings/Railroads/Depots/depot.tscn" id="4_7fcys"]
 [ext_resource type="Script" path="res://UI/Builder/building_data.gd" id="4_ljext"]
-[ext_resource type="PackedScene" uid="uid://b2vbn26jqv268" path="res://Scenes/Buildings/Railroads/track_we.tscn" id="5_l70h1"]
+[ext_resource type="PackedScene" uid="uid://b2vbn26jqv268" path="res://Scenes/Buildings/Railroads/Tracks/track.tscn" id="7_64vdw"]
+[ext_resource type="Theme" uid="uid://dci65vvl4aep7" path="res://UI/main_theme.tres" id="7_cyg03"]
 
 [sub_resource type="Resource" id="Resource_6tes5"]
 script = ExtResource("4_ljext")
-building_name = "Base Building"
+building_name = "Depot"
 building_button_icon = ExtResource("3_lhk0c")
-building_scene = ExtResource("3_luiuj")
+building_scene = ExtResource("4_7fcys")
 
 [sub_resource type="Resource" id="Resource_61jv8"]
 script = ExtResource("4_ljext")
 building_name = "Track"
 building_button_icon = ExtResource("2_kkf6p")
-building_scene = ExtResource("5_l70h1")
+building_scene = ExtResource("7_64vdw")
 
 [node name="BuilderUI" type="Control" groups=["builder_ui"]]
 layout_mode = 3
@@ -27,8 +28,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("7_cyg03")
 script = ExtResource("1_8p1r4")
 building_list = Array[ExtResource("4_ljext")]([SubResource("Resource_6tes5"), SubResource("Resource_61jv8")])
+
+[node name="BulldozerUIOverlay" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"BulldozeOverlay"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -83,5 +96,12 @@ focus_mode = 0
 icon = ExtResource("3_lhk0c")
 icon_alignment = 1
 expand_icon = true
+
+[node name="BulldozerOverlay" type="Panel" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"BulldozeOverlay"
 
 [connection signal="pressed" from="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/Demolish" to="." method="_on_demolish_pressed"]

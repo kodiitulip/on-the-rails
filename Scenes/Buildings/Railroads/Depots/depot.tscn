@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://xcwdolfsija6"]
+
+[ext_resource type="PackedScene" uid="uid://bxknq77fh541" path="res://Scenes/Buildings/building.tscn" id="1_8drja"]
+[ext_resource type="PackedScene" uid="uid://b2vbn26jqv268" path="res://Scenes/Buildings/Railroads/Tracks/track.tscn" id="2_huwjv"]
+
+[node name="Depot" instance=ExtResource("1_8drja")]
+
+[node name="Tracks" type="Node2D" parent="." index="1"]
+
+[node name="Track" parent="Tracks" index="0" instance=ExtResource("2_huwjv")]
+position = Vector2(72, 0)
+
+[node name="Track2" parent="Tracks" index="1" instance=ExtResource("2_huwjv")]
+position = Vector2(48, 0)
+
+[node name="Track3" parent="Tracks" index="2" instance=ExtResource("2_huwjv")]
+position = Vector2(24, 0)
+
+[node name="Track4" parent="Tracks" index="3" instance=ExtResource("2_huwjv")]
+
+[node name="Track5" parent="Tracks" index="4" instance=ExtResource("2_huwjv")]
+position = Vector2(-24, 0)
+
+[node name="Track6" parent="Tracks" index="5" instance=ExtResource("2_huwjv")]
+position = Vector2(-48, 0)
+
+[node name="Icon" parent="." index="2"]
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(1, 0.625)
