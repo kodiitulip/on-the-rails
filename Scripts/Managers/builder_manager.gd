@@ -20,6 +20,7 @@ var _builder_ui: BuilderUI
 var _current_preview: Building
 var _building_container: Node2D
 
+#region Virtual Functions
 func _ready() -> void:
 	_building_container = get_tree().get_first_node_in_group("building_container")
 	_create_preview_container()
@@ -33,46 +34,10 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("place_building"):
 		_place_building_in_world()
+#endregion
 
 
-func _place_building_in_world() -> void:
-	if !_current_preview or \
-			!_current_state == State.BUILD or \
-			!_current_preview._is_placeable:
-		return
-	
-	var placeable: Building = _current_preview.duplicate()
-	#_current_preview._is_placeable = false
-	placeable._is_preview = false
-	if placeable.collided.is_connected(_handle_preview_collision):
-		placeable.collided.disconnect(_handle_preview_collision)
-	_building_container.add_child(placeable)
-	if !Input.is_action_pressed("shift"):
-		_exit_build_mode()
-
-
-func _get_cursor_pos() -> Vector2i:
-	var camera: Camera2D = get_viewport().get_camera_2d()
-	var mouse_pos: Vector2 = camera.get_global_mouse_position()
-	var cursor_pos: Vector2i = mouse_pos.snapped(grid_size)
-	return cursor_pos
-
-
-func _update_preview(cursor_pos: Vector2i) -> void:
-	if _current_state == State.BUILD:
-		_current_preview.position = cursor_pos
-	
-	if Input.is_action_just_pressed("exit_build_mode"):
-		_exit_build_mode()
-
-
-func _get_builder_ui() ->void:
-	_builder_ui = get_tree().get_first_node_in_group("builder_ui")
-	_builder_ui.buidling_selected.connect(_enter_build_mode)
-	_builder_ui.demolish_mode_toggled.connect(_toggle_demolish_mode)
-	demolish_toggled.connect(_builder_ui._update_demolish_overlay)
-
-
+#region BuilderManagement State Machine
 func _enter_build_mode(obj: Building) -> void:
 	_current_state = State.BUILD
 	_clear_preview()
@@ -82,8 +47,30 @@ func _enter_build_mode(obj: Building) -> void:
 	_preview_container.add_child(_current_preview)
 
 
-func _handle_preview_collision(is_colliding: bool) -> void:
-	_current_preview._is_placeable = !is_colliding
+func _exit_build_mode() -> void:
+	_current_state = State.NONE
+	demolish_toggled.emit(_current_state == State.DESTROY)
+	_clear_preview()
+
+
+func _place_building_in_world() -> void:
+	if !_current_preview or \
+			!_current_state == State.BUILD or \
+			!_current_preview._is_placeable:
+		return
+	
+	var placeable: Building = _current_preview.duplicate()
+	placeable._is_preview = false
+	placeable._reset_shader_material()
+	
+	_current_preview._is_preview = true
+	
+	if placeable.collided.is_connected(_handle_preview_collision):
+		placeable.collided.disconnect(_handle_preview_collision)
+	_building_container.add_child(placeable)
+	
+	if !Input.is_action_pressed("shift"):
+		_exit_build_mode()
 
 
 func _toggle_demolish_mode() -> void:
@@ -92,6 +79,36 @@ func _toggle_demolish_mode() -> void:
 	else:
 		_current_state = State.DESTROY
 	demolish_toggled.emit(_current_state == State.DESTROY)
+#endregion
+
+
+#region Process Calls
+func _handle_preview_collision(is_colliding: bool) -> void:
+	_current_preview._is_placeable = !is_colliding
+
+
+func _update_preview(cursor_pos: Vector2i) -> void:
+	if _current_state == State.BUILD:
+		_current_preview.position = cursor_pos
+	
+	if Input.is_action_just_pressed("exit_build_mode"):
+		_exit_build_mode()
+#endregion
+
+
+#region Helper Functions
+func _get_builder_ui() ->void:
+	_builder_ui = get_tree().get_first_node_in_group("builder_ui")
+	_builder_ui.buidling_selected.connect(_enter_build_mode)
+	_builder_ui.demolish_mode_toggled.connect(_toggle_demolish_mode)
+	demolish_toggled.connect(_builder_ui._update_demolish_overlay)
+
+
+func _get_cursor_pos() -> Vector2i:
+	var camera: Camera2D = get_viewport().get_camera_2d()
+	var mouse_pos: Vector2 = camera.get_global_mouse_position()
+	var cursor_pos: Vector2i = mouse_pos.snapped(grid_size)
+	return cursor_pos
 
 
 func _clear_preview() -> void:
@@ -103,13 +120,9 @@ func _clear_preview() -> void:
 	_current_preview = null
 
 
-func _exit_build_mode() -> void:
-	_current_state = State.NONE
-	demolish_toggled.emit(_current_state == State.DESTROY)
-	_clear_preview()
-
-
 func _create_preview_container() -> void:
 	_preview_container = Node2D.new()
 	_preview_container.name = "BuildPreview"
+	_preview_container.z_index += 1
 	add_child.call_deferred(_preview_container)
+#endregion

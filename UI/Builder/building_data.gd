@@ -3,7 +3,7 @@ class_name BuildingData
 
 signal building_selected(obj: Building)
 
-@export var building_name: String
+@export var building_name_id: String
 @export var building_button_icon: Texture2D
 @export var building_scene: PackedScene
 

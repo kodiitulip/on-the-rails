@@ -4,4 +4,5 @@
 
 [node name="UIManager" type="CanvasLayer" groups=["ui_manager"]]
 
-[node name="BuilderUI" parent="." instance=ExtResource("1_q40g5")]
+[node name="Building" parent="." instance=ExtResource("1_q40g5")]
+grow_vertical = 2

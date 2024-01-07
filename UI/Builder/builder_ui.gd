@@ -9,7 +9,9 @@ signal demolish_mode_toggled()
 @export var building_list: Array[BuildingData]
 
 func _ready() -> void:
+	#TranslationServer.set_locale("en")
 	_populate_buttons()
+	
 
 
 func _populate_buttons() -> void:
@@ -17,17 +19,21 @@ func _populate_buttons() -> void:
 		return
 	for i in range(building_list.size()):
 		var button: Button = Button.new()
-		button.name = building_list[i].building_name
-		button.icon = building_list[i].building_button_icon
-		button.expand_icon = true
-		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		button.vertical_icon_alignment = VERTICAL_ALIGNMENT_CENTER
-		button.focus_mode = Control.FOCUS_NONE
-		button.custom_minimum_size = Vector2(40,40)
-		button.tooltip_text = building_list[i].building_name
-		button_container.add_child.call_deferred(button)
-		button.pressed.connect(building_list[i]._select_this_building)
-		building_list[i].building_selected.connect(_select_building)
+		_set_up_building_button(button, building_list[i])
+
+
+func _set_up_building_button(button: Button, build_data: BuildingData) -> void:
+	button_container.add_child.call_deferred(button)
+	button.name = tr(build_data.building_name_id)
+	button.icon = build_data.building_button_icon
+	button.tooltip_text = tr(build_data.building_name_id)
+	button.custom_minimum_size = Vector2(40,40)
+	button.expand_icon = true
+	button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	button.vertical_icon_alignment = VERTICAL_ALIGNMENT_CENTER
+	button.focus_mode = Control.FOCUS_NONE
+	button.pressed.connect(build_data._select_this_building)
+	build_data.building_selected.connect(_select_building)
 
 
 func _select_building(obj: Building) -> void:
@@ -35,7 +41,6 @@ func _select_building(obj: Building) -> void:
 
 
 func _update_demolish_overlay(toggled: bool) -> void:
-	$BulldozerUIOverlay.visible = toggled
 	%BulldozerOverlay.visible = toggled
 
 

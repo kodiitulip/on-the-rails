@@ -63,6 +63,10 @@ place_building={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Assets/Localization/lang.en.translation", "res://Assets/Localization/lang.pt_BR.translation")
+
 [layer_names]
 
 2d_physics/layer_1="MouseCursor"

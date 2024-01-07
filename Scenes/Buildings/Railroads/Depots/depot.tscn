@@ -1,29 +1,198 @@
-[gd_scene load_steps=3 format=3 uid="uid://xcwdolfsija6"]
+[gd_scene load_steps=16 format=3 uid="uid://xcwdolfsija6"]
 
 [ext_resource type="PackedScene" uid="uid://bxknq77fh541" path="res://Scenes/Buildings/building.tscn" id="1_8drja"]
-[ext_resource type="PackedScene" uid="uid://b2vbn26jqv268" path="res://Scenes/Buildings/Railroads/Tracks/track.tscn" id="2_huwjv"]
+
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_jksja"]
+parameter_name = "IsPreview"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_1wcp4"]
+default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_h3ahi"]
+default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0.8, 0, 0), 4, Vector3(0.8, 0, 0), 5, Vector3(1, 0, 0)]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_uqspg"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_30bse"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_abrgc"]
+parameter_name = "IsPlaceable"
+default_value_enabled = true
+default_value = true
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_cu7op"]
+default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_t3qf1"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_tp66p"]
+constant = Color(0.459852, 1, 0.317708, 1)
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_fndp2"]
+constant = Color(0.98865, 0.310309, 0.361039, 1)
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_afsl5"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShader" id="VisualShader_ooxpj"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform bool IsPreview = false;
+uniform bool IsPlaceable = true;
+
+
+
+void fragment() {
+// BooleanParameter:10
+	bool n_out10p0 = IsPreview;
+
+
+// BooleanParameter:3
+	bool n_out3p0 = IsPlaceable;
+
+
+// Input:2
+	vec4 n_out2p0 = COLOR;
+	float n_out2p4 = n_out2p0.a;
+
+
+// ColorConstant:7
+	vec4 n_out7p0 = vec4(0.459852, 1.000000, 0.317708, 1.000000);
+
+
+// VectorOp:6
+	vec4 n_out6p0 = n_out2p0 * n_out7p0;
+
+
+// ColorConstant:8
+	vec4 n_out8p0 = vec4(0.988650, 0.310309, 0.361039, 1.000000);
+
+
+// VectorOp:9
+	vec4 n_out9p0 = n_out2p0 * n_out8p0;
+
+
+	vec3 n_out4p0;
+// If:4
+	float n_in4p1 = 1.00000;
+	float n_in4p2 = 0.00001;
+	if(abs((n_out3p0 ? 1.0 : 0.0) - n_in4p1) < n_in4p2)
+	{
+		n_out4p0 = vec3(n_out6p0.xyz);
+	}
+	else if((n_out3p0 ? 1.0 : 0.0) < n_in4p1)
+	{
+		n_out4p0 = vec3(n_out9p0.xyz);
+	}
+	else
+	{
+		n_out4p0 = vec3(n_out6p0.xyz);
+	}
+
+
+	vec3 n_out11p0;
+// If:11
+	float n_in11p1 = 1.00000;
+	float n_in11p2 = 0.00001;
+	if(abs((n_out10p0 ? 1.0 : 0.0) - n_in11p1) < n_in11p2)
+	{
+		n_out11p0 = n_out4p0;
+	}
+	else if((n_out10p0 ? 1.0 : 0.0) < n_in11p1)
+	{
+		n_out11p0 = vec3(n_out2p0.xyz);
+	}
+	else
+	{
+		n_out11p0 = n_out4p0;
+	}
+
+
+	vec3 n_out12p0;
+// If:12
+	float n_in12p1 = 1.00000;
+	float n_in12p2 = 0.00001;
+	vec3 n_in12p3 = vec3(0.80000, 0.00000, 0.00000);
+	vec3 n_in12p4 = vec3(0.80000, 0.00000, 0.00000);
+	vec3 n_in12p5 = vec3(1.00000, 0.00000, 0.00000);
+	if(abs((n_out10p0 ? 1.0 : 0.0) - n_in12p1) < n_in12p2)
+	{
+		n_out12p0 = n_in12p3;
+	}
+	else if((n_out10p0 ? 1.0 : 0.0) < n_in12p1)
+	{
+		n_out12p0 = n_in12p5;
+	}
+	else
+	{
+		n_out12p0 = n_in12p4;
+	}
+
+
+// FloatOp:13
+	float n_out13p0 = n_out12p0.x * n_out2p4;
+
+
+// Output:0
+	COLOR.rgb = n_out11p0;
+	COLOR.a = n_out13p0;
+
+
+}
+"
+graph_offset = Vector2(-776.616, -251.328)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(580, 260)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_30bse")
+nodes/fragment/2/position = Vector2(-720, 340)
+nodes/fragment/3/node = SubResource("VisualShaderNodeBooleanParameter_abrgc")
+nodes/fragment/3/position = Vector2(-380, 100)
+nodes/fragment/4/node = SubResource("VisualShaderNodeIf_cu7op")
+nodes/fragment/4/position = Vector2(-100, 220)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVectorOp_t3qf1")
+nodes/fragment/6/position = Vector2(-300, 240)
+nodes/fragment/7/node = SubResource("VisualShaderNodeColorConstant_tp66p")
+nodes/fragment/7/position = Vector2(-580, 280)
+nodes/fragment/8/node = SubResource("VisualShaderNodeColorConstant_fndp2")
+nodes/fragment/8/position = Vector2(-580, 460)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorOp_afsl5")
+nodes/fragment/9/position = Vector2(-300, 360)
+nodes/fragment/10/node = SubResource("VisualShaderNodeBooleanParameter_jksja")
+nodes/fragment/10/position = Vector2(-380, -40)
+nodes/fragment/11/node = SubResource("VisualShaderNodeIf_1wcp4")
+nodes/fragment/11/position = Vector2(60, 160)
+nodes/fragment/12/node = SubResource("VisualShaderNodeIf_h3ahi")
+nodes/fragment/12/position = Vector2(60, -40)
+nodes/fragment/13/node = SubResource("VisualShaderNodeFloatOp_uqspg")
+nodes/fragment/13/position = Vector2(220, 560)
+nodes/fragment/connections = PackedInt32Array(2, 0, 6, 0, 7, 0, 6, 1, 8, 0, 9, 1, 2, 0, 9, 0, 6, 0, 4, 3, 9, 0, 4, 5, 2, 4, 13, 1, 13, 0, 0, 1, 3, 0, 4, 0, 4, 0, 11, 3, 2, 0, 11, 5, 11, 0, 0, 0, 10, 0, 11, 0, 12, 0, 13, 0, 10, 0, 12, 0, 4, 0, 11, 4, 6, 0, 4, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ywogs"]
+resource_local_to_scene = true
+shader = SubResource("VisualShader_ooxpj")
+shader_parameter/IsPreview = false
+shader_parameter/IsPlaceable = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mg7ph"]
+size = Vector2(126, 126)
 
 [node name="Depot" instance=ExtResource("1_8drja")]
+material = SubResource("ShaderMaterial_ywogs")
 
-[node name="Tracks" type="Node2D" parent="." index="1"]
-
-[node name="Track" parent="Tracks" index="0" instance=ExtResource("2_huwjv")]
-position = Vector2(72, 0)
-
-[node name="Track2" parent="Tracks" index="1" instance=ExtResource("2_huwjv")]
-position = Vector2(48, 0)
-
-[node name="Track3" parent="Tracks" index="2" instance=ExtResource("2_huwjv")]
-position = Vector2(24, 0)
-
-[node name="Track4" parent="Tracks" index="3" instance=ExtResource("2_huwjv")]
-
-[node name="Track5" parent="Tracks" index="4" instance=ExtResource("2_huwjv")]
-position = Vector2(-24, 0)
-
-[node name="Track6" parent="Tracks" index="5" instance=ExtResource("2_huwjv")]
-position = Vector2(-48, 0)
-
-[node name="Icon" parent="." index="2"]
+[node name="Icon" parent="." index="0"]
 position = Vector2(0, 9.53674e-07)
-scale = Vector2(1, 0.625)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision" index="0"]
+shape = SubResource("RectangleShape2D_mg7ph")

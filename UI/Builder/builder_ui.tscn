@@ -1,55 +1,43 @@
 [gd_scene load_steps=10 format=3 uid="uid://bmkylp6mag1b5"]
 
 [ext_resource type="Script" path="res://UI/Builder/builder_ui.gd" id="1_8p1r4"]
-[ext_resource type="Texture2D" uid="uid://cuavlmqqttskv" path="res://Assets/track.png" id="2_kkf6p"]
 [ext_resource type="Texture2D" uid="uid://cx3qqaqk6c6bi" path="res://icon.svg" id="3_lhk0c"]
-[ext_resource type="PackedScene" uid="uid://xcwdolfsija6" path="res://Scenes/Buildings/Railroads/Depots/depot.tscn" id="4_7fcys"]
-[ext_resource type="Script" path="res://UI/Builder/building_data.gd" id="4_ljext"]
-[ext_resource type="PackedScene" uid="uid://b2vbn26jqv268" path="res://Scenes/Buildings/Railroads/Tracks/track.tscn" id="7_64vdw"]
+[ext_resource type="PackedScene" uid="uid://xcwdolfsija6" path="res://Scenes/Buildings/Railroads/Depots/depot.tscn" id="4_p7j6n"]
+[ext_resource type="Script" path="res://UI/Builder/building_data.gd" id="5_stiyj"]
+[ext_resource type="Texture2D" uid="uid://cuavlmqqttskv" path="res://Assets/track.png" id="6_x2uck"]
 [ext_resource type="Theme" uid="uid://dci65vvl4aep7" path="res://UI/main_theme.tres" id="7_cyg03"]
+[ext_resource type="PackedScene" uid="uid://b2vbn26jqv268" path="res://Scenes/Buildings/Railroads/Tracks/track.tscn" id="7_dd6cl"]
 
-[sub_resource type="Resource" id="Resource_6tes5"]
-script = ExtResource("4_ljext")
-building_name = "Depot"
+[sub_resource type="Resource" id="Resource_3ws2s"]
+script = ExtResource("5_stiyj")
+building_name_id = "core.buildings.railroads.depot"
 building_button_icon = ExtResource("3_lhk0c")
-building_scene = ExtResource("4_7fcys")
+building_scene = ExtResource("4_p7j6n")
 
-[sub_resource type="Resource" id="Resource_61jv8"]
-script = ExtResource("4_ljext")
-building_name = "Track"
-building_button_icon = ExtResource("2_kkf6p")
-building_scene = ExtResource("7_64vdw")
+[sub_resource type="Resource" id="Resource_rmton"]
+script = ExtResource("5_stiyj")
+building_name_id = "core.buildings.railroads.track"
+building_button_icon = ExtResource("6_x2uck")
+building_scene = ExtResource("7_dd6cl")
 
 [node name="BuilderUI" type="Control" groups=["builder_ui"]]
 layout_mode = 3
-anchors_preset = 15
+anchor_top = 0.8
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("7_cyg03")
 script = ExtResource("1_8p1r4")
-building_list = Array[ExtResource("4_ljext")]([SubResource("Resource_6tes5"), SubResource("Resource_61jv8")])
-
-[node name="BulldozerUIOverlay" type="Panel" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_type_variation = &"BulldozeOverlay"
+building_list = Array[ExtResource("5_stiyj")]([SubResource("Resource_3ws2s"), SubResource("Resource_rmton")])
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.8
+anchor_top = -0.0277778
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 16.0
+offset_top = 2.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_left = 16
@@ -73,9 +61,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 7
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_bottom = 7
 
 [node name="ButtonContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
@@ -84,14 +72,15 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 7
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_bottom = 7
 
 [node name="Demolish" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
+tooltip_text = "core.ui.demolish_button"
 focus_mode = 0
 icon = ExtResource("3_lhk0c")
 icon_alignment = 1

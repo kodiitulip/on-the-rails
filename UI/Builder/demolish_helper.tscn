@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt2mm66gov58s"]
+
+[ext_resource type="Texture2D" uid="uid://cx3qqaqk6c6bi" path="res://icon.svg" id="2_xu2j6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nco70"]
+radius = 2.0
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 0.0888889
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_xu2j6")
+expand_mode = 1
+
+[node name="MouseCollision" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="MouseCollision"]
+shape = SubResource("CircleShape2D_nco70")
