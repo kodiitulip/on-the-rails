@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk47aolip8ej6"
-path="res://.godot/imported/train_car.png-c652705e3432fd1268d5c78910869d60.ctex"
+uid="uid://c07o07i265j81"
+path="res://.godot/imported/crosstie.png-c296e4eb370a580b72955c23e8f8291c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/train_car.png"
-dest_files=["res://.godot/imported/train_car.png-c652705e3432fd1268d5c78910869d60.ctex"]
+source_file="res://Assets/Sprites/Railroads/Tracks/crosstie.png"
+dest_files=["res://.godot/imported/crosstie.png-c296e4eb370a580b72955c23e8f8291c.ctex"]
 
 [params]
 

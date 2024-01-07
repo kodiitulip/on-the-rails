@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c07o07i265j81"
-path="res://.godot/imported/crosstie.png-8f956a3a37ebf4ee82069ab4a6c375b4.ctex"
+uid="uid://cuavlmqqttskv"
+path="res://.godot/imported/track.png-812e1d57900261aaa37683dd4ee6ed5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/crosstie.png"
-dest_files=["res://.godot/imported/crosstie.png-8f956a3a37ebf4ee82069ab4a6c375b4.ctex"]
+source_file="res://Assets/Sprites/Railroads/Tracks/track.png"
+dest_files=["res://.godot/imported/track.png-812e1d57900261aaa37683dd4ee6ed5d.ctex"]
 
 [params]
 

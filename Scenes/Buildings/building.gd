@@ -1,10 +1,9 @@
-extends Node2D
+extends Area2D
 class_name Building
 
 signal collided(is_colliding: bool)
 
 const placeable_shader: VisualShader = preload("res://UI/Builder/Shaders/placeable_shader.tres")
-const outline_shader: VisualShader = preload("res://UI/Builder/Shaders/outline_shader.tres")
 
 enum Orientation {
 	N,
@@ -24,8 +23,12 @@ var _is_placeable: bool = true:
 
 func _ready() -> void:
 	material_backup = material
-	$Collision.area_entered.connect(_on_collision_area_entered)
-	$Collision.area_exited.connect(_on_collision_area_exited)
+	area_entered.connect(_on_collision_area_entered)
+	area_exited.connect(_on_collision_area_exited)
+
+
+func _update_select_box_visiblility(toggled: bool) -> void:
+	$SelectBox.visible = toggled
 
 
 func _update_shader_is_preview(value: bool) -> void:
@@ -39,19 +42,21 @@ func _update_shader_is_placeable(value: bool) -> void:
 	material.set_shader_parameter("IsPlaceable", value)
 
 
+func _demolish_self() -> void:
+	queue_free()
+
+
 func _on_collision_area_entered(area) -> void:
-	if !_is_preview:
-		return
-	objects.append(area)
-	collided.emit(true)
+	if _is_preview:
+		objects.append(area)
+		collided.emit(true)
 
 
 func _on_collision_area_exited(area) -> void:
-	if !_is_preview:
-		return
-	objects.remove_at(objects.find(area))
-	if objects.size() <= 0:
-		collided.emit(false)
+	if _is_preview:
+		objects.remove_at(objects.find(area))
+		if objects.size() <= 0:
+			collided.emit(false)
 
 
 func _reset_shader_material() -> void:

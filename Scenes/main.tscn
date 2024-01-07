@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/panning_camera.gd" id="1_haewf"]
 [ext_resource type="PackedScene" uid="uid://b8ockt1tysyry" path="res://UI/ui_manager.tscn" id="1_ut2lw"]
-[ext_resource type="Texture2D" uid="uid://by71etoiufin5" path="res://Assets/train_engine.png" id="2_2c6x6"]
+[ext_resource type="Texture2D" uid="uid://by71etoiufin5" path="res://Assets/Sprites/Railroads/TrainCars/train_engine.png" id="3_6fufx"]
 
 [node name="Main" type="Node2D"]
 
@@ -17,5 +17,4 @@ layer = 2
 [node name="BuildingContainer" type="Node2D" parent="WorldContainer" groups=["building_container"]]
 
 [node name="TrainEngine" type="Sprite2D" parent="WorldContainer"]
-position = Vector2(40, 16)
-texture = ExtResource("2_2c6x6")
+texture = ExtResource("3_6fufx")

@@ -2,45 +2,45 @@
 
 [ext_resource type="PackedScene" uid="uid://bxknq77fh541" path="res://Scenes/Buildings/building.tscn" id="1_e67g2"]
 [ext_resource type="Script" path="res://Scenes/Buildings/Railroads/Tracks/track.gd" id="2_byv7d"]
-[ext_resource type="Texture2D" uid="uid://cuavlmqqttskv" path="res://Assets/track.png" id="3_us3ws"]
+[ext_resource type="Texture2D" uid="uid://cuavlmqqttskv" path="res://Assets/Sprites/Railroads/Tracks/track.png" id="4_o8g15"]
 
-[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_jksja"]
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_h5mk2"]
 parameter_name = "IsPreview"
 default_value_enabled = true
 
-[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_1wcp4"]
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_txxqf"]
 default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
 
-[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_h3ahi"]
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_00ttl"]
 default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0.8, 0, 0), 4, Vector3(0.8, 0, 0), 5, Vector3(1, 0, 0)]
 
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_uqspg"]
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_67hhb"]
 operator = 2
 
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_30bse"]
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_08u5n"]
 expanded_output_ports = [0]
 input_name = "color"
 
-[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_abrgc"]
+[sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_i0j28"]
 parameter_name = "IsPlaceable"
 default_value_enabled = true
 default_value = true
 
-[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_cu7op"]
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_14qwt"]
 default_input_values = [0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
 
-[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_t3qf1"]
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_2kbev"]
 default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
 op_type = 2
 operator = 2
 
-[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_tp66p"]
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_lewqk"]
 constant = Color(0.459852, 1, 0.317708, 1)
 
-[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_fndp2"]
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_n7smu"]
 constant = Color(0.98865, 0.310309, 0.361039, 1)
 
-[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_afsl5"]
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_kgl1h"]
 default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
 op_type = 2
 operator = 2
@@ -157,27 +157,27 @@ graph_offset = Vector2(-404.045, -8.12883)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(580, 260)
-nodes/fragment/2/node = SubResource("VisualShaderNodeInput_30bse")
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_08u5n")
 nodes/fragment/2/position = Vector2(-720, 340)
-nodes/fragment/3/node = SubResource("VisualShaderNodeBooleanParameter_abrgc")
+nodes/fragment/3/node = SubResource("VisualShaderNodeBooleanParameter_i0j28")
 nodes/fragment/3/position = Vector2(-380, 100)
-nodes/fragment/4/node = SubResource("VisualShaderNodeIf_cu7op")
+nodes/fragment/4/node = SubResource("VisualShaderNodeIf_14qwt")
 nodes/fragment/4/position = Vector2(-100, 260)
-nodes/fragment/6/node = SubResource("VisualShaderNodeVectorOp_t3qf1")
+nodes/fragment/6/node = SubResource("VisualShaderNodeVectorOp_2kbev")
 nodes/fragment/6/position = Vector2(-300, 240)
-nodes/fragment/7/node = SubResource("VisualShaderNodeColorConstant_tp66p")
+nodes/fragment/7/node = SubResource("VisualShaderNodeColorConstant_lewqk")
 nodes/fragment/7/position = Vector2(-580, 280)
-nodes/fragment/8/node = SubResource("VisualShaderNodeColorConstant_fndp2")
+nodes/fragment/8/node = SubResource("VisualShaderNodeColorConstant_n7smu")
 nodes/fragment/8/position = Vector2(-580, 460)
-nodes/fragment/9/node = SubResource("VisualShaderNodeVectorOp_afsl5")
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorOp_kgl1h")
 nodes/fragment/9/position = Vector2(-300, 360)
-nodes/fragment/10/node = SubResource("VisualShaderNodeBooleanParameter_jksja")
+nodes/fragment/10/node = SubResource("VisualShaderNodeBooleanParameter_h5mk2")
 nodes/fragment/10/position = Vector2(-120, 100)
-nodes/fragment/11/node = SubResource("VisualShaderNodeIf_1wcp4")
+nodes/fragment/11/node = SubResource("VisualShaderNodeIf_txxqf")
 nodes/fragment/11/position = Vector2(120, 260)
-nodes/fragment/12/node = SubResource("VisualShaderNodeIf_h3ahi")
+nodes/fragment/12/node = SubResource("VisualShaderNodeIf_00ttl")
 nodes/fragment/12/position = Vector2(120, 60)
-nodes/fragment/13/node = SubResource("VisualShaderNodeFloatOp_uqspg")
+nodes/fragment/13/node = SubResource("VisualShaderNodeFloatOp_67hhb")
 nodes/fragment/13/position = Vector2(280, 120)
 nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 6, 0, 7, 0, 6, 1, 8, 0, 9, 1, 2, 0, 9, 0, 6, 0, 4, 3, 6, 0, 4, 4, 9, 0, 4, 5, 10, 0, 11, 0, 4, 0, 11, 3, 4, 0, 11, 4, 2, 0, 11, 5, 10, 0, 12, 0, 11, 0, 0, 0, 2, 4, 13, 1, 13, 0, 0, 1, 12, 0, 13, 0)
 
@@ -188,14 +188,19 @@ shader_parameter/IsPreview = false
 shader_parameter/IsPlaceable = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jcr2j"]
-size = Vector2(22, 30)
+size = Vector2(16, 30)
 
 [node name="Track" instance=ExtResource("1_e67g2")]
 material = SubResource("ShaderMaterial_jvc1i")
 script = ExtResource("2_byv7d")
 
-[node name="Icon" parent="." index="0"]
-texture = ExtResource("3_us3ws")
-
-[node name="CollisionShape" type="CollisionShape2D" parent="Collision" index="0"]
+[node name="CollisionShape" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("RectangleShape2D_jcr2j")
+
+[node name="Icon" parent="." index="1"]
+texture = ExtResource("4_o8g15")
+
+[node name="SelectBox" parent="." index="2"]
+offset_left = -12.0
+offset_top = -10.0
+offset_bottom = 10.0

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt2mm66gov58s"]
+
+[ext_resource type="Script" path="res://UI/Builder/mouse_collision.gd" id="1_768s0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nco70"]
+radius = 0.2
+
+[node name="MouseCollision" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_768s0")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nco70")

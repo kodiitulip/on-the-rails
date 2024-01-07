@@ -1,19 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxknq77fh541"]
+[gd_scene load_steps=4 format=3 uid="uid://bxknq77fh541"]
 
 [ext_resource type="Script" path="res://Scenes/Buildings/building.gd" id="1_mn2nh"]
 [ext_resource type="Texture2D" uid="uid://cx3qqaqk6c6bi" path="res://icon.svg" id="2_sl2yu"]
+[ext_resource type="Texture2D" uid="uid://dhhgjr568pyq1" path="res://Assets/UI/outline_box.png" id="3_i8ccn"]
 
-[node name="Building" type="Node2D"]
+[node name="Building" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_mn2nh")
 
 [node name="Icon" type="Sprite2D" parent="."]
 use_parent_material = true
 texture = ExtResource("2_sl2yu")
 
-[node name="Collision" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
-
-[node name="SubBuildings" type="Node2D" parent="."]
-unique_name_in_owner = true
-use_parent_material = true
+[node name="SelectBox" type="NinePatchRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_i8ccn")
+draw_center = false
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2

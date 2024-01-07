@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc35u6vjesiop"
-path="res://.godot/imported/train_wheels.png-6bb52ef771754412b34d4f5be60f47bf.ctex"
+uid="uid://dk47aolip8ej6"
+path="res://.godot/imported/train_car.png-c75a31383a484a27037efa293ead5eb9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/train_wheels.png"
-dest_files=["res://.godot/imported/train_wheels.png-6bb52ef771754412b34d4f5be60f47bf.ctex"]
+source_file="res://Assets/Sprites/Railroads/TrainCars/train_car.png"
+dest_files=["res://.godot/imported/train_car.png-c75a31383a484a27037efa293ead5eb9.ctex"]
 
 [params]
 
