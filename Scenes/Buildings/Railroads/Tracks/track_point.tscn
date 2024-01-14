@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2vbn26jqv268"]
+
+[ext_resource type="PackedScene" uid="uid://bxknq77fh541" path="res://Scenes/Buildings/building.tscn" id="1_s0va2"]
+[ext_resource type="Script" path="res://Scenes/Buildings/Railroads/Tracks/track_point.gd" id="2_kyn1f"]
+[ext_resource type="Texture2D" uid="uid://bbrgphq2fxl6i" path="res://Assets/Sprites/Railroads/Tracks/track_line.png" id="4_up6y6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w01ba"]
+size = Vector2(7, 18)
+
+[node name="TrackStart" instance=ExtResource("1_s0va2")]
+script = ExtResource("2_kyn1f")
+is_duplicable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_w01ba")
+
+[node name="Icon" parent="." index="1"]
+position = Vector2(4, 0)
+scale = Vector2(8, 1)
+texture = ExtResource("4_up6y6")
+
+[node name="SelectBox" parent="." index="2"]
+offset_top = -10.0
+offset_right = 8.0
+offset_bottom = 10.0

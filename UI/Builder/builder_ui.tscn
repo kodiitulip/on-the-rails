@@ -1,96 +1,107 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmkylp6mag1b5"]
+[gd_scene load_steps=11 format=3 uid="uid://bmkylp6mag1b5"]
 
 [ext_resource type="Script" path="res://UI/Builder/builder_ui.gd" id="1_8p1r4"]
 [ext_resource type="Texture2D" uid="uid://cx3qqaqk6c6bi" path="res://icon.svg" id="3_lhk0c"]
 [ext_resource type="PackedScene" uid="uid://xcwdolfsija6" path="res://Scenes/Buildings/Railroads/Depots/depot.tscn" id="4_p7j6n"]
 [ext_resource type="Script" path="res://UI/Builder/building_data.gd" id="5_stiyj"]
+[ext_resource type="Texture2D" uid="uid://ef2rlhe1n82m" path="res://Assets/UI/arrow.png" id="6_jp4kl"]
 [ext_resource type="Texture2D" uid="uid://cuavlmqqttskv" path="res://Assets/Sprites/Railroads/Tracks/track.png" id="6_u3hmp"]
+[ext_resource type="PackedScene" uid="uid://bxknq77fh541" path="res://Scenes/Buildings/building.tscn" id="7_1iiyg"]
 [ext_resource type="Theme" uid="uid://dci65vvl4aep7" path="res://UI/main_theme.tres" id="7_cyg03"]
-[ext_resource type="PackedScene" uid="uid://b2vbn26jqv268" path="res://Scenes/Buildings/Railroads/Tracks/track.tscn" id="7_dd6cl"]
 
 [sub_resource type="Resource" id="Resource_3ws2s"]
 script = ExtResource("5_stiyj")
-building_name_id = "core.buildings.railroads.depot"
+building_name_id = "buildings:train_depot"
 building_button_icon = ExtResource("3_lhk0c")
 building_scene = ExtResource("4_p7j6n")
 
-[sub_resource type="Resource" id="Resource_rmton"]
+[sub_resource type="Resource" id="Resource_61rmf"]
 script = ExtResource("5_stiyj")
-building_name_id = "core.buildings.railroads.track"
-building_button_icon = ExtResource("6_u3hmp")
-building_scene = ExtResource("7_dd6cl")
+building_name_id = "buildings:train_depot"
+building_button_icon = ExtResource("6_jp4kl")
+building_scene = ExtResource("7_1iiyg")
 
 [node name="BuilderUI" type="Control" groups=["builder_ui"]]
+custom_minimum_size = Vector2(640, 58)
 layout_mode = 3
-anchor_top = 0.8
+anchor_top = 0.838889
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_vertical = 0
 mouse_filter = 2
 theme = ExtResource("7_cyg03")
 script = ExtResource("1_8p1r4")
-building_list = Array[ExtResource("5_stiyj")]([SubResource("Resource_3ws2s"), SubResource("Resource_rmton")])
+building_list = Array[ExtResource("5_stiyj")]([SubResource("Resource_3ws2s"), SubResource("Resource_61rmf")])
 metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.0277778
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 2.0
 grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 8
-metadata/_edit_use_anchors_ = true
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+[node name="BuildingsContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/HBoxContainer/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/HBoxContainer/BuildingsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 7
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="ButtonContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/ScrollContainer/MarginContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/BuildingsContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 7
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 7
+theme_override_constants/separation = 2
 
-[node name="Demolish" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(40, 40)
+[node name="ExtraButtonContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
-tooltip_text = "core.ui.demolish_button"
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/HBoxContainer/ExtraButtonContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TrackBuilderButton" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/ExtraButtonContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "ui:train_track_builder"
+focus_mode = 0
+icon = ExtResource("6_u3hmp")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Demolish" type="Button" parent="MarginContainer/PanelContainer/HBoxContainer/ExtraButtonContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+tooltip_text = "ui:demolish_button"
 focus_mode = 0
 icon = ExtResource("3_lhk0c")
 icon_alignment = 1
 expand_icon = true
 
-[node name="BulldozerOverlay" type="Panel" parent="MarginContainer/PanelContainer/HBoxContainer/MarginContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-mouse_filter = 2
-theme_type_variation = &"BulldozeOverlay"
-
-[connection signal="pressed" from="MarginContainer/PanelContainer/HBoxContainer/MarginContainer/Demolish" to="." method="_on_demolish_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/HBoxContainer/ExtraButtonContainer/HBoxContainer/TrackBuilderButton" to="." method="_on_track_builder_button_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/HBoxContainer/ExtraButtonContainer/HBoxContainer/Demolish" to="." method="_on_demolish_pressed"]

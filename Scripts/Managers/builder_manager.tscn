@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://c05j2wl53bq0y"]
+
+[ext_resource type="Script" path="res://Scripts/Managers/builder_manager.gd" id="1_hg68c"]
+[ext_resource type="PackedScene" uid="uid://dt2mm66gov58s" path="res://UI/Builder/mouse_collision.tscn" id="2_iyoq1"]
+[ext_resource type="Script" path="res://Scripts/Managers/state_build.gd" id="3_mf1d4"]
+[ext_resource type="Script" path="res://Scripts/Managers/state_destroy.gd" id="4_0hlmk"]
+[ext_resource type="Script" path="res://Scripts/Managers/building_state.gd" id="5_etqvt"]
+[ext_resource type="Script" path="res://Scripts/Managers/state_track.gd" id="6_f7rno"]
+
+[node name="BuilderManagerStateMachine" type="Node" node_paths=PackedStringArray("build_state", "destroy_state", "track_state", "none_state")]
+script = ExtResource("1_hg68c")
+build_state = NodePath("States/StateBuild")
+destroy_state = NodePath("States/StateDestroy")
+track_state = NodePath("States/StateTrack")
+none_state = NodePath("States/StateNone")
+
+[node name="BuildPreview" type="Node2D" parent="."]
+z_index = 1
+
+[node name="MouseCollision" parent="." instance=ExtResource("2_iyoq1")]
+z_index = 1
+
+[node name="States" type="Node" parent="."]
+
+[node name="StateBuild" type="Node" parent="States" node_paths=PackedStringArray("build_preview")]
+script = ExtResource("3_mf1d4")
+build_preview = NodePath("../../BuildPreview")
+
+[node name="StateDestroy" type="Node" parent="States" node_paths=PackedStringArray("cursor_collision")]
+script = ExtResource("4_0hlmk")
+cursor_collision = NodePath("../../MouseCollision")
+
+[node name="StateTrack" type="Node" parent="States" node_paths=PackedStringArray("build_preview")]
+script = ExtResource("6_f7rno")
+build_preview = NodePath("../../BuildPreview")
+
+[node name="StateNone" type="Node" parent="States"]
+script = ExtResource("5_etqvt")
+
+[connection signal="building_deselected" from="MouseCollision" to="." method="deselect_building"]
+[connection signal="building_selected" from="MouseCollision" to="." method="select_building"]

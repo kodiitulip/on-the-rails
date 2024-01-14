@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://bxo7tvkp1gkx8"]
+[gd_resource type="VisualShader" load_steps=10 format=3 uid="uid://bxo7tvkp1gkx8"]
 
 [sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_b4dpi"]
 parameter_name = "IsPlaceable"
@@ -8,6 +8,9 @@ default_value = true
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_rwh13"]
 default_input_values = [0, 0.0, 1, 0.7]
 operator = 2
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_8l0s8"]
+constant = 0.85
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_30bse"]
 expanded_output_ports = [0]
@@ -85,9 +88,12 @@ void fragment() {
 	}
 
 
+// FloatConstant:12
+	float n_out12p0 = 0.850000;
+
+
 // FloatOp:11
-	float n_in11p1 = 0.70000;
-	float n_out11p0 = n_out2p4 * n_in11p1;
+	float n_out11p0 = n_out2p4 * n_out12p0;
 
 
 // Output:0
@@ -117,4 +123,6 @@ nodes/fragment/10/node = SubResource("VisualShaderNodeBooleanParameter_b4dpi")
 nodes/fragment/10/position = Vector2(-380, 100)
 nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_rwh13")
 nodes/fragment/11/position = Vector2(-300, 480)
-nodes/fragment/connections = PackedInt32Array(2, 0, 6, 0, 7, 0, 6, 1, 8, 0, 9, 1, 2, 0, 9, 0, 6, 0, 4, 3, 6, 0, 4, 4, 9, 0, 4, 5, 10, 0, 4, 0, 4, 0, 0, 0, 2, 4, 11, 0, 11, 0, 0, 1)
+nodes/fragment/12/node = SubResource("VisualShaderNodeFloatConstant_8l0s8")
+nodes/fragment/12/position = Vector2(-500, 520)
+nodes/fragment/connections = PackedInt32Array(2, 0, 6, 0, 7, 0, 6, 1, 8, 0, 9, 1, 2, 0, 9, 0, 6, 0, 4, 3, 6, 0, 4, 4, 9, 0, 4, 5, 10, 0, 4, 0, 4, 0, 0, 0, 2, 4, 11, 0, 11, 0, 0, 1, 12, 0, 11, 1)

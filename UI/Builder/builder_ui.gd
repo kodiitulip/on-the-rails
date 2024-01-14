@@ -9,7 +9,7 @@ signal demolish_mode_toggled()
 @export var building_list: Array[BuildingData]
 
 func _ready() -> void:
-	#TranslationServer.set_locale("en")
+	TranslationServer.set_locale("en")
 	_populate_buttons()
 	
 
@@ -27,7 +27,7 @@ func _set_up_building_button(button: Button, build_data: BuildingData) -> void:
 	button.name = tr(build_data.building_name_id)
 	button.icon = build_data.building_button_icon
 	button.tooltip_text = tr(build_data.building_name_id)
-	button.custom_minimum_size = Vector2(40,40)
+	button.custom_minimum_size = Vector2(32,32)
 	button.expand_icon = true
 	button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	button.vertical_icon_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -40,10 +40,9 @@ func _select_building(obj: Building) -> void:
 	buidling_selected.emit(obj)
 
 
-func _update_demolish_overlay(toggled: bool) -> void:
-	%BulldozerOverlay.visible = toggled
-
-
 func _on_demolish_pressed() -> void:
 	demolish_mode_toggled.emit()
 
+
+func _on_track_builder_button_pressed() -> void:
+	BuilderManager._transition_to_track()

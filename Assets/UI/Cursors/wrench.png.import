@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di57w640msjvb"
-path="res://.godot/imported/hammer.png-911db86a829fd96c9e5fd90168aaf2ea.ctex"
+uid="uid://dh2w5p17rmx4c"
+path="res://.godot/imported/wrench.png-287dd949d9951ef13330235a2bfcb3d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/hammer.png"
-dest_files=["res://.godot/imported/hammer.png-911db86a829fd96c9e5fd90168aaf2ea.ctex"]
+source_file="res://Assets/UI/Cursors/wrench.png"
+dest_files=["res://.godot/imported/wrench.png-287dd949d9951ef13330235a2bfcb3d6.ctex"]
 
 [params]
 

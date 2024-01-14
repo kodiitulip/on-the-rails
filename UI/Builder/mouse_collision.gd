@@ -4,6 +4,8 @@ class_name CursorCollision
 signal building_selected(building: Building)
 signal building_deselected(building: Building)
 
+const destroy_cursor = preload("res://Assets/UI/Cursors/hammer.png")
+
 var _objects: Array[Building]
 var _current_selected: Building
 
@@ -12,8 +14,16 @@ func _ready() -> void:
 	area_exited.connect(_on_area_exited)
 
 
-func _process(_delta: float) -> void:
-	position = get_global_mouse_position()
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		position = get_global_mouse_position()
+
+
+func _toggle_demolish(toggled: bool) -> void:
+	if toggled:
+		Input.set_custom_mouse_cursor(destroy_cursor,Input.CURSOR_ARROW,Vector2(2,16))
+	else:
+		Input.set_custom_mouse_cursor(null)
 
 
 func _on_area_entered(area: Building) -> void:

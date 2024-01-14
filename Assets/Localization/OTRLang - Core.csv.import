@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b2th1oei02nle"
+
+[deps]
+
+files=["res://Assets/Localization/OTRLang - Core.en.translation", "res://Assets/Localization/OTRLang - Core.pt_BR.translation"]
+
+source_file="res://Assets/Localization/OTRLang - Core.csv"
+dest_files=["res://Assets/Localization/OTRLang - Core.en.translation", "res://Assets/Localization/OTRLang - Core.pt_BR.translation"]
+
+[params]
+
+compress=true
+delimiter=0

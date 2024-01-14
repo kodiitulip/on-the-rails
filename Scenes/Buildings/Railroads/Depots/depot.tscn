@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://xcwdolfsija6"]
+[gd_scene load_steps=18 format=3 uid="uid://xcwdolfsija6"]
 
 [ext_resource type="PackedScene" uid="uid://bxknq77fh541" path="res://Scenes/Buildings/building.tscn" id="1_8drja"]
+[ext_resource type="Texture2D" uid="uid://cuavlmqqttskv" path="res://Assets/Sprites/Railroads/Tracks/track.png" id="2_73f7f"]
 
 [sub_resource type="VisualShaderNodeBooleanParameter" id="VisualShaderNodeBooleanParameter_jksja"]
 parameter_name = "IsPreview"
@@ -188,6 +189,9 @@ shader_parameter/IsPlaceable = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mg7ph"]
 size = Vector2(126, 126)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qto40"]
+size = Vector2(7, 18)
+
 [node name="Depot" instance=ExtResource("1_8drja")]
 material = SubResource("ShaderMaterial_ywogs")
 
@@ -195,7 +199,16 @@ material = SubResource("ShaderMaterial_ywogs")
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_mg7ph")
 
-[node name="SelectBox" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(67, 0)
+shape = SubResource("RectangleShape2D_qto40")
+
+[node name="Track" type="Sprite2D" parent="." index="2"]
+use_parent_material = true
+position = Vector2(60, 0)
+texture = ExtResource("2_73f7f")
+
+[node name="SelectBox" parent="." index="4"]
 offset_left = -64.0
 offset_top = -64.0
 offset_right = 64.0
